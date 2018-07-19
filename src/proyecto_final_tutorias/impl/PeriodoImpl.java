@@ -25,15 +25,22 @@ public class PeriodoImpl implements IPeriodo {
         boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from master.f_insert_facultad(?,?,?,?)";
-            lstP.add(new Parametro(1, periodo.getCodigo_P()));
-            lstP.add(new Parametro(2, periodo.getNombre()));
-            lstP.add(new Parametro(3, periodo.getFecha_inicio()));
-            lstP.add(new Parametro(4, periodo.getFecha_fin()));
-            lstP.add(new Parametro(5, periodo.getTipo()));
-            lstP.add(new Parametro(6, periodo.getObservaciones()));
-            lstP.add(new Parametro(7, periodo.getCodigo_sicoa()));
-            lstP.add(new Parametro(8, periodo.getEstado()));
+            String sql = "select * from actividades.fninsertar_periodo(?,?,?,?,?,?,?)";
+            lstP.add(new Parametro(1, periodo.getNombre()));
+            if(periodo.getFecha_inicio()instanceof java.util.Date){
+                lstP.add(new Parametro(2,new java.sql.Date(((java.util.Date)periodo.getFecha_inicio()).getTime())));
+            }else {
+                lstP.add(new Parametro(2,periodo.getFecha_inicio()));
+            }
+            if(periodo.getFecha_fin()instanceof java.util.Date){
+                lstP.add(new Parametro(3,new java.sql.Date(((java.util.Date)periodo.getFecha_fin()).getTime())));
+            }else {
+                lstP.add(new Parametro(3,periodo.getFecha_fin()));
+            }
+            lstP.add(new Parametro(4, periodo.getTipo()));
+            lstP.add(new Parametro(5, periodo.getObservaciones()));
+            lstP.add(new Parametro(6, periodo.getCodigo_sicoa()));
+            lstP.add(new Parametro(7, periodo.getEstado()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -50,7 +57,7 @@ public class PeriodoImpl implements IPeriodo {
         Periodo periodo = null;
         try {
             while (rs.next()) {
-                periodo = new Periodo(rs.getInt("pcodigo_P"), rs.getString("pnombre"), rs.getDate("pfecha_inicio"), rs.getDate("pfecha_fin"),
+                periodo = new Periodo(rs.getString("pnombre"), rs.getDate("pfecha_inicio"), rs.getDate("pfecha_fin"),
                          rs.getInt("ptipo"), rs.getString("pobservaciones"), rs.getInt("pcodigo_sicoa"), rs.getInt("pestado"));
                 lst.add(periodo);
             }
@@ -71,10 +78,9 @@ public class PeriodoImpl implements IPeriodo {
             lstP.add(new Parametro(2, periodo.getFecha_inicio()));
             lstP.add(new Parametro(3, periodo.getFecha_fin()));
             lstP.add(new Parametro(4, periodo.getTipo()));
-              lstP.add(new Parametro(1, periodo.getObservaciones()));
-            lstP.add(new Parametro(2, periodo.getCodigo_sicoa()));
-            lstP.add(new Parametro(3, periodo.getEstado()));
-            lstP.add(new Parametro(4, periodo.getCodigo_P()));
+            lstP.add(new Parametro(5, periodo.getObservaciones()));
+            lstP.add(new Parametro(6, periodo.getCodigo_sicoa()));
+            lstP.add(new Parametro(7, periodo.getEstado()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -92,7 +98,7 @@ public class PeriodoImpl implements IPeriodo {
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
             String sql = "select * from master.f_delete_facultad(?)";
-            lstP.add(new Parametro(1, periodo.getCodigo_P()));
+            //lstP.add(new Parametro(1, periodo.getCodigo_P()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));

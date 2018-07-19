@@ -21,19 +21,18 @@ import proyecto_final_tutorias.entidades.Ambito;
 public class AmbitoImpl implements IAmbito {
 
     @Override
-    public int insertar(Ambito ambito) throws Exception {
-            int eje = 0;
+    public boolean insertar(Ambito ambito) throws Exception {
+            boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from actividades.fn_obtener_datos_ambito(?,?,?,?)";
-            lstP.add(new Parametro(1, ambito.getCodigo_A()));
-            lstP.add(new Parametro(2, ambito.getNombre()));
-            lstP.add(new Parametro(3, ambito.getObservacion()));
-            lstP.add(new Parametro(4, ambito.getEstado()));
+            String sql = "select * from actividades.fninsertar_ambito(?,?,?)";
+            lstP.add(new Parametro(1, ambito.getNombre()));
+            lstP.add(new Parametro(2, ambito.getObservacion()));
+            lstP.add(new Parametro(3, ambito.getEstado()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
-                eje = 1;
+                eje = true;
             }
         } catch (SQLException exConec) {
             throw new Exception(exConec.getMessage());
@@ -45,7 +44,7 @@ public class AmbitoImpl implements IAmbito {
         Ambito ambito = null;
         try {
             while (rs.next()) {
-                ambito = new Ambito(rs.getInt("pcodigo"), rs.getString("pnombre"), rs.getString("pobservacion"), rs.getInt("pestado"));
+                ambito = new Ambito(rs.getString("pnombre"), rs.getString("pobservacion"), rs.getInt("pestado"));
                 lst.add(ambito);
             }
         } catch (Exception e) {
@@ -55,19 +54,18 @@ public class AmbitoImpl implements IAmbito {
         return lst;
     }
     @Override
-    public int modificar(Ambito ambito) throws Exception {
-    int eje = 0;
+    public boolean modificar(Ambito ambito) throws Exception {
+    boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from actividades.fnactualizar_ambito(?,?,?,?)";
+            String sql = "select * from actividades.fnactualizar_ambito(?,?,?)";
             lstP.add(new Parametro(1, ambito.getNombre()));
             lstP.add(new Parametro(2, ambito.getObservacion()));
             lstP.add(new Parametro(3, ambito.getEstado()));
-            lstP.add(new Parametro(4, ambito.getCodigo_A()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
-                eje = 1;
+                eje = true;
             }
         } catch (SQLException exConec) {
             throw new Exception(exConec.getMessage());
@@ -76,16 +74,16 @@ public class AmbitoImpl implements IAmbito {
     }
 
     @Override
-    public int eliminar(Ambito ambito) throws Exception {
-        int eje = 0;
+    public boolean eliminar(Ambito ambito) throws Exception {
+        boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
             String sql = "select * from actividades.fneliminar_ambito(?)";
-            lstP.add(new Parametro(1, ambito.getCodigo_A()));
+//            lstP.add(new Parametro(1, ambito.getCodigo_A()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
-                eje = 1;
+                eje = true;
             }
         } catch (SQLException exConec) {
             throw new Exception(exConec.getMessage());

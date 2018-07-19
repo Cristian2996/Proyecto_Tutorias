@@ -23,21 +23,20 @@ public class TestAmbito {
     }
    @Test
     public void pruebageneral() throws Exception{
-        int filasAfectadas = 0;
+        boolean filasAfectadas = false;
         IAmbito ambitoDao = new AmbitoImpl();
-        Ambito ambito = new Ambito(21,"Juan","-",1);
+        Ambito ambito = new Ambito("Monica","Ninguno",1);
         try{
             filasAfectadas = ambitoDao.insertar(ambito);
             System.out.println("Ambito ingresado!!!\n");
         }catch(Exception e){
             System.out.println("Error: "+e.getMessage());
         }
-        assertEquals(filasAfectadas>0, true);
+        assertTrue(filasAfectadas != false);
         
         Ambito ambitoo=new Ambito();
         try {
             ambitoo=ambitoDao.obtener(1);
-            System.out.println("Codigo  :"+ambitoo.getCodigo_A());
             System.out.println("Nombre :"+ambitoo.getNombre());
             System.out.println("Observacion :"+ambitoo.getObservacion());
             System.out.println("Estado :"+ambitoo.getEstado());
@@ -50,7 +49,6 @@ public class TestAmbito {
             lista = ambitoDao.obtener();
             for (Ambito c:lista){
             System.out.println("Datos Producto");
-            System.out.println("Codigo  :"+ambitoo.getCodigo_A());
             System.out.println("Nombre :"+ambitoo.getNombre());
             System.out.println("Apellido :"+ambitoo.getObservacion());
             System.out.println("Cedula :"+ambitoo.getEstado());

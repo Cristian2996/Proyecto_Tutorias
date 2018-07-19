@@ -13,9 +13,9 @@ import proyecto_final_tutorias.entidades.Ambito;
  * @author CRISTIAN
  */
 public interface IAmbito {
-    public int insertar (Ambito ambito)throws Exception;
-    public int modificar (Ambito ambito)throws Exception;
-    public int eliminar (Ambito ambito)throws Exception;
+    public boolean insertar (Ambito ambito)throws Exception;
+    public boolean modificar (Ambito ambito)throws Exception;
+    public boolean eliminar (Ambito ambito)throws Exception;
     public Ambito obtener (int codigo_A)throws Exception;
     public List<Ambito> obtener() throws Exception; 
 }

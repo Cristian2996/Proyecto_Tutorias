@@ -12,7 +12,6 @@ import java.util.Date;
  * @author CRISTIAN
  */
 public class Periodo {
-    private int codigo_P;
     private String nombre;
     private Date fecha_inicio;
     private Date fecha_fin;
@@ -24,8 +23,7 @@ public class Periodo {
     public Periodo() {
     }
 
-    public Periodo(int codigo_P, String nombre, Date fecha_inicio, Date fecha_fin, int tipo, String observaciones, int codigo_sicoa, int estado) {
-        this.codigo_P = codigo_P;
+    public Periodo(String nombre, Date fecha_inicio, Date fecha_fin, int tipo, String observaciones, int codigo_sicoa, int estado) {
         this.nombre = nombre;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
@@ -43,13 +41,6 @@ public class Periodo {
         this.estado = estado;
     }
 
-    public int getCodigo_P() {
-        return codigo_P;
-    }
-
-    public void setCodigo_P(int codigo_P) {
-        this.codigo_P = codigo_P;
-    }
 
     public String getNombre() {
         return nombre;

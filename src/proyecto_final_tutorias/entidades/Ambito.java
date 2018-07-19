@@ -5,12 +5,13 @@
  */
 package proyecto_final_tutorias.entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author CRISTIAN
  */
-public class Ambito {
- private int codigo_A;
+public class Ambito implements Serializable {
  private String nombre;
  private String observacion;
  private int estado;
@@ -18,8 +19,7 @@ public class Ambito {
     public Ambito() {
     }
 
-    public Ambito(int codigo_A, String nombre, String observacion, int estado) {
-        this.codigo_A = codigo_A;
+    public Ambito( String nombre, String observacion, int estado) {
         this.nombre = nombre;
         this.observacion = observacion;
         this.estado = estado;
@@ -33,13 +33,13 @@ public class Ambito {
         this.estado = estado;
     }
 
-    public int getCodigo_A() {
-        return codigo_A;
-    }
-
-    public void setCodigo_A(int codigo_A) {
-        this.codigo_A = codigo_A;
-    }
+//    public int getCodigo_A() {
+//        return codigo_A;
+//    }
+//
+//    public void setCodigo_A(int codigo_A) {
+//        this.codigo_A = codigo_A;
+//    }
 
     public String getNombre() {
         return nombre;

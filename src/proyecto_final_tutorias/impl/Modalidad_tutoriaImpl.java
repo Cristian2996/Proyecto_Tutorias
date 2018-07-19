@@ -25,11 +25,10 @@ public class Modalidad_tutoriaImpl implements IModalidad_Tutoria {
         boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from master.f_insert_facultad(?,?,?,?)";
-            lstP.add(new Parametro(1, modalidad_tutoria.getCodigo_MT()));
-            lstP.add(new Parametro(2, modalidad_tutoria.getNombre()));
-            lstP.add(new Parametro(3, modalidad_tutoria.getDescripcion()));
-            lstP.add(new Parametro(4, modalidad_tutoria.getEstado()));
+            String sql = "select * from actividades.fninsertar_modalidad_tutoria(?,?,?)";
+            lstP.add(new Parametro(1, modalidad_tutoria.getNombre()));
+            lstP.add(new Parametro(2, modalidad_tutoria.getDescripcion()));
+            lstP.add(new Parametro(3, modalidad_tutoria.getEstado()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -46,7 +45,7 @@ public class Modalidad_tutoriaImpl implements IModalidad_Tutoria {
         Modalidad_tutoria modalidad_tutoria = null;
         try {
             while (rs.next()) {
-                modalidad_tutoria = new Modalidad_tutoria(rs.getInt("pcodigo"), rs.getString("pnombre"), rs.getString("pdescripcion"), rs.getInt("pestado"));
+                modalidad_tutoria = new Modalidad_tutoria(rs.getString("pnombre"), rs.getString("pdescripcion"), rs.getInt("pestado"));
                 lst.add(modalidad_tutoria);
             }
         } catch (Exception e) {
@@ -61,11 +60,10 @@ public class Modalidad_tutoriaImpl implements IModalidad_Tutoria {
 boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from master.f_update_facultad(?,?,?,?)";
+            String sql = "select * from master.f_update_facultad(?,?,?)";
             lstP.add(new Parametro(1, modalidad_tutoria.getNombre()));
             lstP.add(new Parametro(2, modalidad_tutoria.getDescripcion()));
             lstP.add(new Parametro(3, modalidad_tutoria.getEstado()));
-            lstP.add(new Parametro(4, modalidad_tutoria.getCodigo_MT()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -83,7 +81,7 @@ boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
             String sql = "select * from master.f_delete_facultad(?)";
-            lstP.add(new Parametro(1, modalidad_tutoria.getCodigo_MT()));
+        //    lstP.add(new Parametro(1, modalidad_tutoria.getCodigo_MT()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));

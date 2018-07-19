@@ -9,28 +9,37 @@ package proyecto_final_tutorias.entidades;
  *
  * @author CRISTIAN
  */
-public class Modalidad_tutoria {
+public class Escuela {
+    private Facultad facultad;
     private String nombre;
     private String descripcion;
-    private int estado;
+    private int codigo_sicoa;
 
-    public Modalidad_tutoria() {
+    public Escuela() {
     }
 
-    public Modalidad_tutoria(String nombre, String descripcion, int estado) {
+    public Escuela(Facultad facultad, String nombre, String descripcion, int codigo_sicoa) {
+        this.facultad = facultad;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.estado = estado;
+        this.codigo_sicoa = codigo_sicoa;
     }
 
-    public int getEstado() {
-        return estado;
+    public int getCodigo_sicoa() {
+        return codigo_sicoa;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setCodigo_sicoa(int codigo_sicoa) {
+        this.codigo_sicoa = codigo_sicoa;
     }
 
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
 
     public String getNombre() {
         return nombre;
@@ -47,5 +56,6 @@ public class Modalidad_tutoria {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
     
 }
